@@ -6,11 +6,11 @@ ports:
 
 # Definition der Aufgaben, die beim Start des Workspaces ausgeführt werden.
 tasks:
-  - name: Setup & Start XTTS (CPU)
-    # 'init' wird nur einmal ausgeführt, um das Docker-Image herunterzuladen.
+  - name: Start XTTS WebUI (GPU)
+    # 'init' wird nur einmal ausgeführt, um das Start-Skript ausführbar zu machen.
     init: |
-      docker pull aladdin1234/xtts-webui:0.2
+      chmod +x ./start_xtts.sh
     # 'command' wird bei jedem Start des Workspaces ausgeführt.
-    # Wir starten den Container jetzt ohne die --gpus Anweisung.
+    # Dieses Skript stoppt alte Container, pullt das Image und startet es mit GPU-Unterstützung.
     command: |
-      docker run -p 8080:8010 aladdin1234/xtts-webui:0.2
+      ./start_xtts.sh

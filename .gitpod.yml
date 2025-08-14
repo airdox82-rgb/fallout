@@ -1,16 +1,17 @@
-# Definieren der Ports, die geöffnet und zugänglich gemacht werden sollen.
+# Define the ports to be opened and made accessible.
 ports:
   - port: 8080
-    # Aktion, die beim Start des Dienstes auf diesem Port ausgeführt wird.
+    # Action to be performed when the service starts on this port.
     onOpen: open-browser
 
-# Definition der Aufgaben, die beim Start des Workspaces ausgeführt werden.
+# Definition of tasks to be executed when the workspace starts.
 tasks:
   - name: Start XTTS WebUI (GPU)
-    # 'init' wird nur einmal ausgeführt, um das Start-Skript ausführbar zu machen.
-    init: |
-      chmod +x ./start_xtts.sh
-    # 'command' wird bei jedem Start des Workspaces ausgeführt.
-    # Dieses Skript stoppt alte Container, pullt das Image und startet es mit GPU-Unterstützung.
+    # 'command' is executed every time the workspace starts.
+    # This script stops old containers, pulls the image, and starts it with GPU support.
     command: |
       ./start_xtts.sh
+
+# Request a GPU-enabled workspace.
+# Note: This might require a paid Gitpod plan.
+gpu: true

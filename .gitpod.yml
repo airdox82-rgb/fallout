@@ -1,0 +1,16 @@
+# Definieren der Ports, die geöffnet und zugänglich gemacht werden sollen.
+ports:
+  - port: 8080
+    # Aktion, die beim Start des Dienstes auf diesem Port ausgeführt wird.
+    onOpen: open-browser
+
+# Definition der Aufgaben, die beim Start des Workspaces ausgeführt werden.
+tasks:
+  - name: Setup & Start XTTS (CPU)
+    # 'init' wird nur einmal ausgeführt, um das Docker-Image herunterzuladen.
+    init: |
+      docker pull aladdin1234/xtts-webui:0.2
+    # 'command' wird bei jedem Start des Workspaces ausgeführt.
+    # Wir starten den Container jetzt ohne die --gpus Anweisung.
+    command: |
+      docker run -p 8080:8010 aladdin1234/xtts-webui:0.2
